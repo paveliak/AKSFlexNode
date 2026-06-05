@@ -468,6 +468,7 @@ func (t *installArcTask) waitForPermissions(ctx context.Context, _ string) error
 
 func (t *installArcTask) isCompleted(ctx context.Context) bool {
 	if !isArcServicesRunning(ctx, t.logger) {
+		t.logger.Info("Arc services not running")
 		return false
 	}
 
@@ -476,6 +477,7 @@ func (t *installArcTask) isCompleted(ctx context.Context) bool {
 
 	output, err := utilexec.OutputCmdAt(timeoutCtx, t.logger, slog.LevelDebug, "azcmagent", "show")
 	if err != nil {
+		t.logger.Info("azcmagent not running")
 		return false
 	}
 
@@ -484,9 +486,11 @@ func (t *installArcTask) isCompleted(ctx context.Context) bool {
 		if strings.Contains(line, "Agent Status") && strings.Contains(line, ":") {
 			parts := strings.SplitN(line, ":", 2)
 			if len(parts) == 2 {
+				t.logger.Info(strings.TrimSpace(parts[1]))
 				return strings.ToLower(strings.TrimSpace(parts[1])) == "connected"
 			}
 		}
 	}
+	t.logger.Info("isCompleted utterly failed")
 	return false
 }
