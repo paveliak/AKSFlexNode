@@ -324,7 +324,7 @@ func (t *installArcTask) runArcAgentConnect(ctx context.Context) error {
 func (t *installArcTask) validateManagedCluster(ctx context.Context) error {
 	cfg := t.cfg
 	arcConfig := cfg.Azure.Arc
-	clusterRG := arcConfig.ResourceGroup
+	clusterRG := "aksflex";//arcConfig.ResourceGroup
 	clusterName := cfg.Azure.TargetCluster.Name
 
 	result, err := t.mcClient.Get(ctx, clusterRG, clusterName, nil)
