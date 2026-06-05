@@ -372,9 +372,9 @@ func (t *installArcTask) assignRBACRoles(ctx context.Context, arcMachine *armhyb
 
 func (t *installArcTask) getRoleAssignments() []roleAssignment {
 	cfg := t.cfg
-	arcConfig := cfg.Azure.Arc
+	//arcConfig := cfg.Azure.Arc
 	subID := cfg.Azure.SubscriptionID
-	rg := arcConfig.ResourceGroup
+	rg := cfg.Azure.TargetCluster.ResourceGroup
 	clusterName := cfg.Azure.TargetCluster.Name
 
 	subScope := fmt.Sprintf("/subscriptions/%s", subID)
