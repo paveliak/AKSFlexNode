@@ -261,7 +261,7 @@ func (t *installArcTask) waitForArcRegistration(ctx context.Context) (*armhybrid
 		if err == nil && machine != nil && machine.Identity != nil && machine.Identity.PrincipalID != nil {
 			return machine, nil
 		}
-		t.logger.Info("arc registration not ready, retrying", "attempt", attempt+1, "maxRetries", maxRetries)
+		t.logger.Info(fmt.Sprintf("arc registration not ready, retrying (%v)", err), "attempt", attempt+1, "maxRetries", maxRetries)
 
 		delay := min(initialDelay*time.Duration(1<<attempt), maxDelay)
 		select {
