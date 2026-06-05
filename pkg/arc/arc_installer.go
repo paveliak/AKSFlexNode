@@ -104,10 +104,10 @@ func (t *installArcTask) ensureAuthentication(ctx context.Context) error {
 
 func (t *installArcTask) getCredential() (azcore.TokenCredential, error) {
 	var sources []azcore.TokenCredential
-
+/*
 	cred, err := azidentity.NewManagedIdentityCredential(nil)
 	if err == nil {
-		//sources = append(sources, cred)
+		sources = append(sources, cred)
 	} else {
 		//nolint:gosec // CredentialType is a display label, not a hardcoded credential.
 		sources = append(sources, &utilaz.CredentialErrorReporter{CredentialType: "Arc managed identity", Err: err})
@@ -115,11 +115,11 @@ func (t *installArcTask) getCredential() (azcore.TokenCredential, error) {
 
 	defaultCred, err := azidentity.NewDefaultAzureCredential(nil)
 	if err == nil {
-		//sources = append(sources, defaultCred)
+		sources = append(sources, defaultCred)
 	} else {
 		sources = append(sources, &utilaz.CredentialErrorReporter{CredentialType: "default Azure", Err: err})
 	}
-
+*/
 	cliCred, err := azidentity.NewAzureCLICredential(nil)
 	if err == nil {
 		sources = append(sources, cliCred)
