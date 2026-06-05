@@ -19,7 +19,7 @@ var (
 	}
 
 	// Arc services that may be present (not all are guaranteed to exist on every installation)
-	arcServices = []string{"himdsd", "gcarcservice", "extd"}
+	arcServices = []string{"himdsd", "gcad", "extd"}
 
 	// Arc agent binary paths
 	arcBinaryPaths = []string{
@@ -41,8 +41,8 @@ var (
 	// Arc systemd service files
 	arcServiceFiles = []string{
 		"/lib/systemd/system/himdsd.service",
-		"/lib/systemd/system/gcarcservice.service",
+		"/lib/systemd/system/gcad.service",
 		"/etc/systemd/system/himdsd.service",
-		"/etc/systemd/system/gcarcservice.service",
+		"/etc/systemd/system/gcad.service",
 	}
 )
